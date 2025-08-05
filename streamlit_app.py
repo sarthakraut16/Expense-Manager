@@ -7,10 +7,8 @@ import datetime
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive']
 
 # Use credentials from Streamlit secrets
-creds = Credentials.from_service_account_info(
-    st.secrets["gcp_service_account"],
-    scopes=SCOPES
-)
+creds = Credentials.from_service_account_file("credentials.json", scopes=SCOPES)
+
 client = gspread.authorize(creds)
 
 # Connect to spreadsheet and sheets
@@ -90,3 +88,4 @@ if rows:
     st.dataframe(rows, use_container_width=True)
 else:
     st.info("No expenses recorded yet.")
+
