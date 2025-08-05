@@ -5,7 +5,12 @@ import datetime
 
 # ---- Google Sheets Setup ----
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive']
-creds = Credentials.from_service_account_file("credentials.json", scopes=SCOPES)
+
+# Use credentials from Streamlit secrets
+creds = Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"],
+    scopes=SCOPES
+)
 client = gspread.authorize(creds)
 
 # Connect to spreadsheet and sheets
